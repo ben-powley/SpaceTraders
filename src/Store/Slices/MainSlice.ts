@@ -1,22 +1,31 @@
-import { createSlice, PayloadAction } from "@reduxjs/toolkit"
+import { createSlice } from "@reduxjs/toolkit"
+import acceptContract from "Store/Thunks/AcceptContract"
+import registerNewGame from "Store/Thunks/RegisterThunk"
+import { RegisterNewGameResponse } from "Types/RegisterNewGameResponse"
+import { Contract } from "Types/SpaceTraderTypes"
 
-type MainState = {
-  apiKey: string
+export type MainState = {
+  spaceTraderDetails?: RegisterNewGameResponse
+  activeContract?: Contract
 }
 
-const initialState: MainState = {
-  apiKey: "",
-}
+const initialState: MainState = {}
 
 export const MainSlice = createSlice({
   name: "Main",
   initialState,
-  reducers: {
-    setAPIKey: (state, action: PayloadAction<string>) => {
-      state.apiKey = action.payload
-    },
+  reducers: {},
+  extraReducers: (builder) => {
+    builder.addCase(registerNewGame.fulfilled, (state, action) => {
+      state.spaceTraderDetails = action.payload
+
+      state.activeContract = action.payload?.data.contract
+    }),
+      builder.addCase(acceptContract.fulfilled, (state, action) => {
+        state.activeContract = action.payload?.data.contract
+      })
   },
 })
 
-export const { setAPIKey } = MainSlice.actions
+// export const {} = MainSlice.actions
 export default MainSlice.reducer
