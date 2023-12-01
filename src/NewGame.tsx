@@ -1,42 +1,55 @@
+import { useAppDispatch } from "Store/Hooks"
+import { setAPIKey } from "Store/Slices/MainSlice"
 import { useState } from "react"
 
-/**
- * This component is a basic MVP of part one of the quickstart. It handles registering your agent and receives a token
- * which you will need to use in subsequent calls. Therefore, you might want to refactor or replace this as you move forward.
- */
-
 function NewGame() {
-  const [token, setToken] = useState();
-  const [resp, setResp] = useState("");
-  const [form, setForm] = useState({ symbol: "", faction: "COSMIC" });
+  const [resp, setResp] = useState("")
+  const [form, setForm] = useState({ symbol: "", faction: "COSMIC" })
 
-  return (<>
-    <h1>New Game</h1>
-    <input name="symbol" value={form.symbol} onChange={(e) => setForm({ ...form, symbol: e.currentTarget.value })} />
-    <input name="faction" value={form.faction} onChange={(e) => setForm({ ...form, faction: e.currentTarget.value })} />
-    <input type="submit" onClick={async () => {
-      const resp = await fetch("https://api.spacetraders.io/v2/register", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify({
-          symbol: form.symbol,
-          faction: form.faction,
-        }),
-      });
+  const dispatch = useAppDispatch()
 
-      const json = await resp.json();
+  const onFormSubmit = async () => {
+    const resp = await fetch("https://api.spacetraders.io/v2/register", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        symbol: form.symbol,
+        faction: form.faction,
+      }),
+    })
 
-      if (resp.ok) {
-        setToken(json.data.token)
-      }
+    const json = await resp.json()
 
-      setResp(JSON.stringify(json, null, 2))
-    }} />
-    <pre>API token: {token}</pre>
-    <pre>Response: {resp}</pre>
-  </>)
+    if (resp.ok) {
+      dispatch(setAPIKey(json.data.token))
+    }
+
+    setResp(JSON.stringify(json, null, 2))
+  }
+
+  return (
+    <div className="flex flex-col justify-center gap-3 bg-zinc-900 p-6 w-1/3 mx-auto my-24">
+      <h1 className="text-4xl text-white font-bold">New Game</h1>
+      <input
+        className="py-2 px-2 rounded-md bg-zinc-700 text-zinc-200"
+        name="symbol"
+        value={form.symbol}
+        onChange={(e) => setForm({ ...form, symbol: e.currentTarget.value })}
+        placeholder="Symbol"
+      />
+      <input
+        className="py-2 px-2 rounded-md bg-zinc-700 text-zinc-200"
+        name="faction"
+        value={form.faction}
+        onChange={(e) => setForm({ ...form, faction: e.currentTarget.value })}
+        placeholder="Faction"
+      />
+      <input className="bg-emerald-500 py-2 rounded-md hover:bg-emerald-600 cursor-pointer" type="submit" onClick={() => onFormSubmit()} />
+      <pre>Response: {resp}</pre>
+    </div>
+  )
 }
 
 export default NewGame
