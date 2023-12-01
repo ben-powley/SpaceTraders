@@ -3,5 +3,13 @@
 @tailwind utilities;
 
 body {
-  @apply bg-zinc-950
+  @apply bg-zinc-950 text-white font-bold uppercase
+}
+
+button, input[type="submit"] {
+  @apply bg-emerald-500 py-2 px-5 rounded-md hover:bg-emerald-600 cursor-pointer
+}
+
+input[type="text"] {
+  @apply py-2 px-2 rounded-md bg-zinc-700 text-zinc-200
 }
