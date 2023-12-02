@@ -7,7 +7,7 @@ type RegisterThunkProps = {
   faction: string
 }
 
-const registerNewGame = createAsyncThunk("main/registerNewGame", async ({ symbol, faction }: RegisterThunkProps) => {
+const registerNewGame = createAsyncThunk("main/registerNewGame", async ({ symbol, faction }: RegisterThunkProps, thunkApi) => {
   try {
     const resp = await fetch(SPACETRADERS_REGISTER_URL, {
       method: "POST",

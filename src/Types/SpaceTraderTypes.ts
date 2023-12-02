@@ -185,6 +185,33 @@ export interface Agent {
   shipCount: number
 }
 
+interface Orbital {
+  symbol: string
+}
+
+export interface Waypoint {
+  symbol: string
+  type: string
+  x: number
+  y: number
+  orbitals: Orbital[]
+}
+
+export interface System {
+  symbol: string
+  sectorSymbol: string
+  type: string
+  x: number
+  y: number
+  waypoints: Waypoint[]
+}
+
+export interface ResponseMeta {
+  total: number
+  page: number
+  limit: number
+}
+
 export interface RegisterResponse {
   token: string
   agent: Agent

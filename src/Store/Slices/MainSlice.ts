@@ -1,12 +1,14 @@
 import { createSlice } from "@reduxjs/toolkit"
 import acceptContract from "Store/Thunks/AcceptContract"
+import fetchSystems from "Store/Thunks/GetSystems"
 import registerNewGame from "Store/Thunks/RegisterThunk"
 import { RegisterNewGameResponse } from "Types/RegisterNewGameResponse"
-import { Contract } from "Types/SpaceTraderTypes"
+import { Contract, System } from "Types/SpaceTraderTypes"
 
 export type MainState = {
   spaceTraderDetails?: RegisterNewGameResponse
   activeContract?: Contract
+  systems?: System[]
 }
 
 const initialState: MainState = {}
@@ -23,6 +25,9 @@ export const MainSlice = createSlice({
     }),
       builder.addCase(acceptContract.fulfilled, (state, action) => {
         state.activeContract = action.payload?.data.contract
+      }),
+      builder.addCase(fetchSystems.fulfilled, (state, action) => {
+        state.systems = action.payload?.data
       })
   },
 })
