@@ -213,9 +213,9 @@ export interface ResponseMeta {
 }
 
 export interface RegisterResponse {
-  token: string
-  agent: Agent
-  contract: Contract
-  faction: Faction
-  ship: ShipDetails
+  token?: string
+  agent?: Agent
+  contract?: Contract
+  faction?: Faction
+  ship?: ShipDetails
 }

@@ -1,4 +1,4 @@
-import { configureStore } from "@reduxjs/toolkit"
+import { combineReducers, configureStore } from "@reduxjs/toolkit"
 import mainSliceReducer from "Store/Slices/MainSlice"
 import { persistReducer, persistStore } from "redux-persist"
 import storage from "redux-persist/lib/storage"
@@ -8,10 +8,11 @@ const persistConfig = {
   storage,
 }
 
-const persistedReducer = persistReducer(persistConfig, mainSliceReducer)
+export const persistedReducer = persistReducer(persistConfig, mainSliceReducer)
+export const mainReducer = combineReducers({ main: persistedReducer })
 
 export const store = configureStore({
-  reducer: { main: persistedReducer },
+  reducer: mainReducer,
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({
       serializableCheck: false,
@@ -19,6 +20,7 @@ export const store = configureStore({
   devTools: process.env.NODE_ENV !== "production",
 })
 
-export type RootState = ReturnType<typeof store.getState>
+export type RootState = ReturnType<typeof mainReducer>
 export type AppDispatch = typeof store.dispatch
+export type AppStore = typeof store
 export const persistor = persistStore(store)

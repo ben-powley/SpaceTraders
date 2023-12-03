@@ -1,7 +1,7 @@
 import { it, expect, vi } from "vitest"
 import { screen } from "@testing-library/react"
 import NewGame from "./NewGame"
-import { renderWithProviders } from "Test/Utils"
+import renderWithProviders from "Test/Utils"
 
 it("renders", async () => {
   // Arrange
