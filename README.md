@@ -1,5 +1,7 @@
 # STQS
 
+Live Demo: [https://space-traders-virid.vercel.app/]()
+
 ## Requirements
 
 NodeJS 18+
