@@ -21,10 +21,12 @@ export const MainSlice = createSlice({
   reducers: {},
   extraReducers: (builder) => {
     builder.addCase(registerNewGame.fulfilled, (state, action) => {
-      state.spaceTraderDetails = action.payload
+      if (action.payload) {
+        state.spaceTraderDetails = action.payload
 
-      state.token = action.payload?.data.token
-      state.activeContract = action.payload?.data.contract
+        state.token = action.payload?.data.token
+        state.activeContract = action.payload?.data.contract
+      }
     }),
       builder.addCase(acceptContract.fulfilled, (state, action) => {
         state.activeContract = action.payload?.data.contract
