@@ -1,6 +1,6 @@
 # STQS
 
-Live Demo: [https://space-traders-virid.vercel.app/]()
+Live Demo: [https://space-traders-virid.vercel.app/](https://space-traders-virid.vercel.app/)
 
 ## Requirements
 
@@ -18,4 +18,4 @@ See `package.json` for more details on available scripts.
 Run the project (or read `./src/App.tsx`) for details of the exercise.
 
 ## Credits
-Planet images from [https://github.com/Stumblinbear/Deliverance]()
+Planet images from [https://github.com/Stumblinbear/Deliverance](https://github.com/Stumblinbear/Deliverance)
