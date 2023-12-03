@@ -1,7 +1,7 @@
 import { configureStore } from "@reduxjs/toolkit"
 import mainSliceReducer from "Store/Slices/MainSlice"
 import { persistReducer, persistStore } from "redux-persist"
-import storage from "redux-persist/lib/storage/session"
+import storage from "redux-persist/lib/storage"
 
 const persistConfig = {
   key: "root",
