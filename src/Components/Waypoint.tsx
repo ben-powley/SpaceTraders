@@ -1,12 +1,12 @@
 import { Waypoint } from "Types/SpaceTraderTypes"
-import { useEffect, useState } from "react"
+import { useEffect, useMemo, useState } from "react"
 
 type Props = {
   waypoint: Waypoint
 }
 
 const Waypoint = ({ waypoint }: Props) => {
-  const planetTypes = ["dry-0", "continental-0", "lava-0"]
+  const planetTypes = useMemo(() => ["dry-0", "continental-0", "lava-0"], [])
   const [image, setImage] = useState("planets/barren-0")
 
   useEffect(() => {
@@ -27,7 +27,7 @@ const Waypoint = ({ waypoint }: Props) => {
           break
       }
     }
-  }, [waypoint])
+  }, [waypoint, planetTypes])
 
   return (
     <div className="bg-zinc-700 rounded-md text-emerald-500 p-2">

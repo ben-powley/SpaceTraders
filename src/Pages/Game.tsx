@@ -18,8 +18,8 @@ const Game = () => {
       return
     }
 
-    dispatch(fetchSystems(spaceTraderDetails.data.token))
-  }, [navigate, spaceTraderDetails])
+    dispatch(fetchSystems())
+  }, [dispatch, navigate, spaceTraderDetails])
 
   return (
     <div className="flex">
