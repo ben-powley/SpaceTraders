@@ -1,13 +1,15 @@
 import { createAsyncThunk } from "@reduxjs/toolkit"
 import { SPACETRADERS_REGISTER_URL } from "Helpers/URLHelper"
+import { RootState } from "Store"
 import { RegisterNewGameResponse } from "Types/RegisterNewGameResponse"
 
-type RegisterThunkProps = {
-  symbol: string
-  faction: string
-}
-
-const registerNewGame = createAsyncThunk("main/registerNewGame", async ({ symbol, faction }: RegisterThunkProps, thunkApi) => {
+const registerNewGame = createAsyncThunk<
+  RegisterNewGameResponse | null,
+  { symbol: string; faction: string },
+  {
+    state: RootState
+  }
+>("main/registerNewGame", async ({ symbol, faction }) => {
   try {
     const resp = await fetch(SPACETRADERS_REGISTER_URL, {
       method: "POST",
@@ -26,6 +28,8 @@ const registerNewGame = createAsyncThunk("main/registerNewGame", async ({ symbol
   } catch (exception) {
     alert(exception)
   }
+
+  return null
 })
 
 export default registerNewGame

@@ -3,14 +3,14 @@ import acceptContract from "Store/Thunks/AcceptContract"
 
 const Contracts = () => {
   const dispatch = useAppDispatch()
-  const apiKey = useAppSelector((state) => state.main.spaceTraderDetails?.data.token)
+  const apiKey = useAppSelector((state) => state.main.token)
   const activeContract = useAppSelector((state) => state.main.activeContract)
 
   const onAcceptContract = () => {
     const contractId = activeContract?.id
 
     if (contractId && apiKey) {
-      dispatch(acceptContract({ apiKey, contractId }))
+      dispatch(acceptContract({ contractId }))
     }
   }
 

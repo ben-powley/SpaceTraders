@@ -1,19 +1,25 @@
 import { createAsyncThunk } from "@reduxjs/toolkit"
 import { SPACE_TRADERS_ACCEPT_CONTRACT_URL, SPACTRADERS_MY_CONTRACTS_URL } from "Helpers/URLHelper"
+import { RootState } from "Store"
 import { AccpetContractResponse } from "Types/AcceptContractResponse"
 
-type AcceptContractThunkProps = {
-  apiKey: string
-  contractId: string
-}
-
-const acceptContract = createAsyncThunk("main/acceptContract", async ({ apiKey, contractId }: AcceptContractThunkProps) => {
+const acceptContract = createAsyncThunk<
+  AccpetContractResponse | null,
+  { contractId: string },
+  {
+    state: RootState
+  }
+>("main/acceptContract", async ({ contractId }, thunkAPI) => {
   try {
+    const state = thunkAPI.getState()
+
+    if (!state.main.token) throw new Error("No token found.")
+
     const resp = await fetch(`${SPACTRADERS_MY_CONTRACTS_URL}${contractId}${SPACE_TRADERS_ACCEPT_CONTRACT_URL}`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
-        Authorization: `Bearer ${apiKey}`,
+        Authorization: `Bearer ${state.main.token}`,
       },
     })
 
@@ -23,6 +29,8 @@ const acceptContract = createAsyncThunk("main/acceptContract", async ({ apiKey, 
   } catch (exception) {
     alert(exception)
   }
+
+  return null
 })
 
 export default acceptContract

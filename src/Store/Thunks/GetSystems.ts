@@ -1,13 +1,24 @@
 import { createAsyncThunk } from "@reduxjs/toolkit"
 import { SPACETRADERS_SYSTEMS_URL } from "Helpers/URLHelper"
+import { RootState } from "Store"
 import { FetchSystemsResponse } from "Types/FetchSystemsResponse"
 
-const fetchSystems = createAsyncThunk("main/fetchSystems", async (apiKey: string) => {
+const fetchSystems = createAsyncThunk<
+  FetchSystemsResponse | null,
+  void,
+  {
+    state: RootState
+  }
+>("main/fetchSystems", async (_, thunkAPI) => {
   try {
+    const state = thunkAPI.getState()
+
+    if (!state.main.token) throw new Error("No token found.")
+
     const resp = await fetch(SPACETRADERS_SYSTEMS_URL, {
       headers: {
         "Content-Type": "application/json",
-        Authorization: `Bearer ${apiKey}`,
+        Authorization: `Bearer ${state.main.token}`,
       },
     })
 
@@ -17,6 +28,8 @@ const fetchSystems = createAsyncThunk("main/fetchSystems", async (apiKey: string
   } catch (exception) {
     alert(exception)
   }
+
+  return null
 })
 
 export default fetchSystems

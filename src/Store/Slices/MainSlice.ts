@@ -9,6 +9,8 @@ export type MainState = {
   spaceTraderDetails?: RegisterNewGameResponse
   activeContract?: Contract
   systems?: System[]
+
+  token?: string
 }
 
 const initialState: MainState = {}
@@ -21,6 +23,7 @@ export const MainSlice = createSlice({
     builder.addCase(registerNewGame.fulfilled, (state, action) => {
       state.spaceTraderDetails = action.payload
 
+      state.token = action.payload?.data.token
       state.activeContract = action.payload?.data.contract
     }),
       builder.addCase(acceptContract.fulfilled, (state, action) => {

@@ -5,7 +5,7 @@ import { useNavigate } from "react-router-dom"
 
 const App = () => {
   const navigate = useNavigate()
-  const apiKey = useAppSelector((state) => state.main.spaceTraderDetails?.data.token)
+  const apiKey = useAppSelector((state) => state.main.token)
 
   useEffect(() => {
     if (apiKey) {
