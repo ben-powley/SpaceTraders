@@ -27,7 +27,9 @@ function NewGame() {
 
   return (
     <div className="flex flex-col justify-center w-1/3 gap-3 p-6 mx-auto my-24 rounded-md bg-zinc-900">
-      <h1 className="mb-1 text-3xl font-bold text-white">New Game</h1>
+      <h1 className="mb-1 text-3xl font-bold text-white" role="heading">
+        New Game
+      </h1>
 
       {formError.length > 0 && (
         <div className="flex items-center gap-3 p-3 text-red-100 bg-red-700 rounded-md">

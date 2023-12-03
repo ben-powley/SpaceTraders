@@ -1,14 +1,20 @@
-import { it, expect } from "vitest";
-import { render, screen } from "@testing-library/react";
-import NewGame from "./NewGame";
+import { it, expect, vi } from "vitest"
+import { screen } from "@testing-library/react"
+import NewGame from "./NewGame"
+import { renderWithProviders } from "Test/Utils"
 
 it("renders", async () => {
-    // Arrange
-    render(<NewGame />)
+  // Arrange
+  renderWithProviders(<NewGame />)
 
-    // Act
-    await screen.findByRole("heading");
+  vi.mock("react-router-dom", () => ({
+    ...vi.importActual("react-router-dom"),
+    useNavigate: () => vi.fn(),
+  }))
 
-    // Assert
-    expect(screen.getByRole("heading")).toHaveTextContent("New Game");
+  // Act
+  await screen.findByRole("heading")
+
+  // Assert
+  expect(screen.getByRole("heading")).toHaveTextContent("New Game")
 })
