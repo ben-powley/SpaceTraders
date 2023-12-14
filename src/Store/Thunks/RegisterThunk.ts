@@ -1,7 +1,7 @@
 import { createAsyncThunk } from "@reduxjs/toolkit"
 import { SPACETRADERS_REGISTER_URL } from "Helpers/URLHelper"
 import { RootState } from "Store"
-import { RegisterNewGameResponse } from "Types/RegisterNewGameResponse"
+import { RegisterNewGameResponse } from "Types/RegisterNewGame"
 
 const registerNewGame = createAsyncThunk<
   RegisterNewGameResponse | null,

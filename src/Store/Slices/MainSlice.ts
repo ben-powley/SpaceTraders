@@ -2,7 +2,7 @@ import { createSlice } from "@reduxjs/toolkit"
 import acceptContract from "Store/Thunks/AcceptContract"
 import fetchSystems from "Store/Thunks/GetSystems"
 import registerNewGame from "Store/Thunks/RegisterThunk"
-import { RegisterNewGameResponse } from "Types/RegisterNewGameResponse"
+import { RegisterNewGameResponse } from "Types/RegisterNewGame"
 import { Contract, System } from "Types/SpaceTraderTypes"
 
 export type MainState = {
