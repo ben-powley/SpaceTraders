@@ -27,13 +27,13 @@ export const MainSlice = createSlice({
         state.token = action.payload?.data.token
         state.activeContract = action.payload?.data.contract
       }
-    }),
-      builder.addCase(acceptContract.fulfilled, (state, action) => {
-        state.activeContract = action.payload?.data.contract
-      }),
-      builder.addCase(fetchSystems.fulfilled, (state, action) => {
-        state.systems = action.payload?.data
-      })
+    })
+    builder.addCase(acceptContract.fulfilled, (state, action) => {
+      state.activeContract = action.payload?.data.contract
+    })
+    builder.addCase(fetchSystems.fulfilled, (state, action) => {
+      state.systems = action.payload?.data
+    })
   },
 })
 

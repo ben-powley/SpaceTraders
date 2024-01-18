@@ -7,7 +7,7 @@ const Agent = () => {
 
   return (
     <div className="flex flex-col gap-2 bg-zinc-800 p-5 rounded-md w-[400px]">
-      <div role="heading">Agent Info</div>
+      <div>Agent Info</div>
       <div className="flex items-center gap-3">
         Symbol: <span className="text-emerald-500">{agent.symbol}</span>
       </div>
